@@ -108,6 +108,96 @@ async function cadastrarEvento() {
         exibirAlerta('.alert-evento', 'Preencha todos os campos', ['show','alert-danger'], ['d-none'], 2000)
     }
 }
+
+const GEMINI_KEY = "AIzaSyD1awN-5c-tyrkM-TqXJkPYdcX5DuVJkDQ";
+  
+async function gerarNome(categoria) {
+    try {
+        const response = await axios.post(
+           ` https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
+            {
+                contents: [
+                    {
+                        role: "user",
+                        parts: [
+                            {
+                          text: `Apresente um nome criativo e chamativo com base na categoria: "${categoria}" do evento. Não precisa utilizar caracteres especiais no texto, como #, **, etc.`
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                headers: { "Content-Type": "application/json" }
+            }
+        );
+  
+        console.log("API Response:", response.data);
+  
+        const nome = response.data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
+  
+        return nome || "Nome não gerado";
+    } catch (error) {
+        console.error("Erro ao gerar o nome do evento:", error.response?.data || error.message);
+        return "";
+    }
+}
+
+async function gerarDescricao(categoria) {
+    try {
+        const response = await axios.post(
+            `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
+            {
+                contents: [
+                    {
+                        role: "user",
+                        parts: [
+                            {
+                                text: `Apresente uma descrição criativa e chamativa com base na categoria: "${categoria}" do evento. Não precisa utilizar caracteres especiais no texto, como #, **, etc.`
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                headers: { "Content-Type": "application/json" }
+            }
+        );
+  
+        console.log("API Response:", response.data);
+  
+        const descricao = response.data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+  
+        return descricao || "Descrição não gerada";
+    } catch (error) {
+        console.error("Erro ao gerar a descrição do evento:", error.response?.data || error.message);
+        return "";
+    }
+}
+  
+async function gerarNomeDescricao() {
+    const categoria = document.getElementById("categoriaInput").value;
+    const descricao = document.getElementById("descricaoInput");
+    const nome = document.getElementById("nomeInput")
+  
+    if (!categoria) {
+        alert("Preencha a categoria do evento antes de gerar seu nome ou descrição.");
+        return;
+    }
+  
+    alert("Gerando informações do evento");
+    const novoNome = await gerarNome(categoria);
+    const novaDescricao = await gerarDescricao(categoria);
+
+    if (novaDescricao && novoNome) {
+        descricao.value = novaDescricao; 
+        nome.value = novoNome; 
+    } else {
+        alert("Erro ao gerar informações para este evento.");
+    }
+}
+
+document.getElementById("btn-gerar-info").addEventListener("click", gerarNomeDescricao);
  
 // API para listar eventos 
 async function carregarEventos() {
