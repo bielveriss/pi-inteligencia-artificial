@@ -107,7 +107,7 @@ async function cadastrarEvento() {
     }
 }
 
-const GEMINI_KEY = "AIzaSyD1awN-5c-tyrkM-TqXJkPYdcX5DuVJkDQ";
+const GEMINI_KEY = "";
   
 async function gerarNome(categoria) {
     try {
