@@ -119,7 +119,7 @@ async function gerarNome(categoria) {
                         role: "user",
                         parts: [
                             {
-                          text: `Apresente um nome criativo e chamativo com base na categoria: "${categoria}" do evento. Não precisa utilizar caracteres especiais no texto, como #, **, etc.`
+                          text: `Apresente um unico nome criativo e chamativo com base na categoria: "${categoria}" do evento. Não precisa utilizar caracteres especiais no texto, como #, **, etc.`
                             }
                         ]
                     }
@@ -204,6 +204,7 @@ async function gerarValor(categoria) {
         return "";
     }
 }
+
   
 async function gerarNomeDescricaoValor() {
     const categoria = document.getElementById("categoriaInput").value;
@@ -212,7 +213,7 @@ async function gerarNomeDescricaoValor() {
     const valor = document.getElementById("precoInput")
   
     if (!categoria) {
-        alert("Preencha a categoria do evento antes de gerar seu nome ou descrição.");
+        alert("Preencha a categoria do evento antes de gerar seu nome, descrição ou valor.");
         return;
     }
   
@@ -221,12 +222,14 @@ async function gerarNomeDescricaoValor() {
     const novaDescricao = await gerarDescricao(categoria);
     const novoValor = await gerarValor(categoria);
 
+
     if (novaDescricao && novoNome && novoValor) {
         descricao.value = novaDescricao; 
         nome.value = novoNome; 
         valor.value = novoValor;
+
     } else {
-        alert("Erro ao gerar informações para este evento.");
+        alert("Erro ao gerar informações.");
     }
 }
 
