@@ -1,6 +1,6 @@
 O intuito do novo projeto. é: Com base na IA do GEMINI, na hora de cadastrar um evento, ele ira gerar sugestões de descrição e nomes com base na categoria do evento. 
 
-Quando realizar a clonagem do repositorio, devera adicionar o Gemini Key (caso necessario), no campo "const GEMINI_KEY = "" que se encontra no arquivo "cadastroEvento.js" localizado na pasta web. 
+Quando realizar a clonagem do repositorio, devera adicionar o Gemini Key, na linha 110, no campo "const GEMINI_KEY = "" que se encontra no arquivo "cadastroEvento.js" localizado na pasta web. 
 Segue a chave: AIzaSyD1awN-5c-tyrkM-TqXJkPYdcX5DuVJkDQ
 
 Pode seguir o caminho normal, clique no botão Cadastro de Eventos localizado na nav-bar, faça o cadastro de usuario e efetue o login. Vá novamente ao cadastro de eventos e por fim, ira localizar um botão "gerar dados" no final do formulario. 
