@@ -107,7 +107,7 @@ async function cadastrarEvento() {
     }
 }
 
-const GEMINI_KEY = "";
+const GEMINI_KEY = "AIzaSyD1awN-5c-tyrkM-TqXJkPYdcX5DuVJkDQ";
   
 async function gerarNome(categoria) {
     try {
@@ -172,11 +172,44 @@ async function gerarDescricao(categoria) {
         return "";
     }
 }
+
+async function gerarValor(categoria) {
+    try {
+        const response = await axios.post(
+            `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
+            {
+                contents: [
+                    {
+                        role: "user",
+                        parts: [
+                            {
+                                text: `Apresente um preço consideravel para a entrada com base na categoria: "${categoria}" do evento. Não precisa utilizar caracteres e caracteres especiais no texto, como #, **, etc. Utilize numeros`
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                headers: { "Content-Type": "application/json" }
+            }
+        );
   
-async function gerarNomeDescricao() {
+        console.log("API Response:", response.data);
+  
+        const descricao = response.data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+  
+        return descricao || "Descrição não gerada";
+    } catch (error) {
+        console.error("Erro ao gerar a descrição do evento:", error.response?.data || error.message);
+        return "";
+    }
+}
+  
+async function gerarNomeDescricaoValor() {
     const categoria = document.getElementById("categoriaInput").value;
     const descricao = document.getElementById("descricaoInput");
     const nome = document.getElementById("nomeEventoInput")
+    const valor = document.getElementById("precoInput")
   
     if (!categoria) {
         alert("Preencha a categoria do evento antes de gerar seu nome ou descrição.");
@@ -186,14 +219,16 @@ async function gerarNomeDescricao() {
     alert("Gerando informações do evento");
     const novoNome = await gerarNome(categoria);
     const novaDescricao = await gerarDescricao(categoria);
+    const novoValor = await gerarValor(categoria);
 
-    if (novaDescricao && novoNome) {
+    if (novaDescricao && novoNome && novoValor) {
         descricao.value = novaDescricao; 
         nome.value = novoNome; 
+        valor.value = novoValor;
     } else {
         alert("Erro ao gerar informações para este evento.");
     }
 }
 
-document.getElementById("btn-gerar-info").addEventListener("click", gerarNomeDescricao);
+document.getElementById("btn-gerar-info").addEventListener("click", gerarNomeDescricaoValor);
  
