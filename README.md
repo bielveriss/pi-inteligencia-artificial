@@ -7,4 +7,4 @@ Pode seguir o caminho normal, clique no botão Cadastro de Eventos localizado na
 
 Caso nao tenha preenchido nada no formulario, ele irá exibir uma mensagem de erro indicando que deve escolher uma categoria. Por fim, selecione a categoria e clique novamente no botão. Aguarde uns instantes e sera retornado uma descrição e um nome para o seu evento. 
 
-Infelizmente, quando voce utiliza a IA, os botoes da navbar acabam nao funcionando mais, entao seria adequado navegar pela URL das paginas: caso queira visualizar o evento cadastrado, colocar "localhost:8080/index.html"
+Infelizmente, quando voce utiliza a IA, os botoes da navbar acabam nao funcionando mais, entao seria adequado navegar pela URL das paginas: caso queira visualizar o evento cadastrado, colocar "localhost:8080/index-03.html"
