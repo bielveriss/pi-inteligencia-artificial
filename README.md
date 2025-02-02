@@ -1,6 +1,6 @@
 O intuito do novo projeto. é: Com base na IA do GEMINI, na hora de cadastrar um evento, ele ira gerar sugestões de descrição, nome e valor com base na categoria do evento. 
 
-Quando realizar a clonagem do repositorio, devera adicionar o Gemini Key, na linha 110, no campo "const GEMINI_KEY = "" que se encontra no arquivo "cadastroEvento.js" localizado na pasta web. 
+Quando realizar a clonagem do repositorio, devera adicionar o Gemini Key, na linha 110, no campo "const GEMINI_KEY = "" que se encontra no arquivo "cadastroEvento.js" localizado na pasta web/js. 
 Segue a chave: AIzaSyD1awN-5c-tyrkM-TqXJkPYdcX5DuVJkDQ
 
 Você pode gerar a sua chave também, se preciso: https://aistudio.google.com/apikey. Clicando no link, clique na opção para gerar chave API.
